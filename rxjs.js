@@ -1,8 +1,7 @@
 // https://www.youtube.com/watch?v=uQ1zhJHclvs
 
-// put subscribe into an object and name it as observable
-// tada... now you got observable, observing something
-const observable = {
+// Rename observable into arrayObservable 
+const ArrayObservable = {
     subscribe: function subscribe(ob) {
         [10,20,30].forEach(ob.next);
         ob.complete();
@@ -21,4 +20,4 @@ const observer = {
     }
 }
 
-observable.subscribe(observer);
+ArrayObservable.subscribe(observer);
