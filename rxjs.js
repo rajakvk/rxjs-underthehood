@@ -1,8 +1,15 @@
 // https://www.youtube.com/watch?v=uQ1zhJHclvs
 
-// Another type of callback in javascript
-const arr = [10, 20, 30, 40, 50, 60];
+// Other types of call back
+const res = fetch('https://jsonplaceholder/typicode.com/users/1'
+).then(r => r.json());
 
-arr.forEach(function cb(x){
-    console.log(x);
-});
+function successCallback(value) {
+    console.log(`We got back ${value}`);
+}
+
+function failureCallback(err) {
+    console.log(`:-( ${err})`);
+}
+// callback for success as well as failure
+res.then(successCallback, failureCallback);
