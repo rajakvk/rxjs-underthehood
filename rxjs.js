@@ -14,7 +14,7 @@ function doneCallback() {
 }
 
 function giveMeSomeData(nextCB, errorCB, completeCB) {
-    fetch(url).then(nextCB, errorCB);
+    [10,20,30].forEach(nextCB);
 }
 
 giveMeSomeData(
