@@ -1,7 +1,13 @@
 // https://www.youtube.com/watch?v=uQ1zhJHclvs
 
-// Rename observable into arrayObservable 
-const ArrayObservable = {
+// Create one more observable object called clickObservable 
+const clickObservable = {
+    subscribe: function subscribe(ob) {
+        document.addEventListener('click', ob.next);
+    }
+}
+
+const arrayObservable = {
     subscribe: function subscribe(ob) {
         [10,20,30].forEach(ob.next);
         ob.complete();
@@ -20,4 +26,4 @@ const observer = {
     }
 }
 
-ArrayObservable.subscribe(observer);
+arrayObservable.subscribe(observer);
