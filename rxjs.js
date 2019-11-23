@@ -1,10 +1,8 @@
 // https://www.youtube.com/watch?v=uQ1zhJHclvs
 
-// Example of simple callback
-const myElem = document.querySelector('#myElem');
+// Another type of callback in javascript
+const arr = [10, 20, 30, 40, 50, 60];
 
-function consoleLogClick(x) {
-    console.log(`Clicked {x}`)
-}
-
-myElem.addEventListener('click', consoleLogClick);
+arr.forEach(function cb(x){
+    console.log(x);
+});
