@@ -1,15 +1,20 @@
 // https://www.youtube.com/watch?v=uQ1zhJHclvs
 
-// Other types of call back
-const res = fetch('https://jsonplaceholder/typicode.com/users/1'
-).then(r => r.json());
+// three call backs when stream of data comes in
+const readable = getReadableStreamSomehow();
 
-function successCallback(value) {
-    console.log(`We got back ${value}`);
+function nextDataCallback(chunk) {
+    console.log(`Received ${chunk.length} byes of data`);
 }
 
-function failureCallback(err) {
-    console.log(`:-( ${err})`);
+function errorCallback(err) {
+    console.log(`Bad stuff happened: ${err}`);
 }
-// callback for success as well as failure
-res.then(successCallback, failureCallback);
+
+function doneCallback() {
+    console.log(`There will be no more data`);
+}
+
+readable.on('data', nextDataCallback);
+readable.on('error', errorCallback);
+readable.on('end', doneCallback);
