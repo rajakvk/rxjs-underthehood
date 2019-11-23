@@ -1,9 +1,30 @@
 // https://www.youtube.com/watch?v=uQ1zhJHclvs
 
-// define helper function to create observable objects
+// implementing map operator
+function map(transformFN) {
+    // in this scenario 'this' refers to arrayObservable
+    const inputObservable = this;
+    const outputObservable = createObservable(function subscribe(outputObservable) {
+        inputObservable.subscribe({
+            next: function(x) {
+                const y = transformFN(x);
+                outputObservable.next(y);
+            },
+            error: function(err) {
+                outputObservable.error(err)
+            },
+            complete: function() {
+                outputObservable.complete();
+            }
+        })
+    });
+    return outputObservable;
+}
+
 function createObservable (subscribe) {
     return {
-        subscribe: subscribe
+        subscribe: subscribe,
+        map: map
     }
 }
 
