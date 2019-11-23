@@ -1,12 +1,12 @@
 // https://www.youtube.com/watch?v=uQ1zhJHclvs
 
-// Generic API with one callback (silly example)
+// Generic API with two callback 
 function nextDataCallback(data) {
     console.log(data);
 }
 
 function errorCallback(err) {
-    //
+    console.log(err);
 }
 
 function doneCallback() {
@@ -14,7 +14,7 @@ function doneCallback() {
 }
 
 function giveMeSomeData(nextCB, errorCB, completeCB) {
-    document.addEventListener('click', nextCB);
+    fetch(url).then(nextCB, errorCB);
 }
 
 giveMeSomeData(
