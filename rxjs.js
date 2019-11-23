@@ -1,6 +1,6 @@
 // https://www.youtube.com/watch?v=uQ1zhJHclvs
 
-// implementing map operator
+// implementing filter operator
 function map(transformFN) {
     // in this scenario 'this' refers to arrayObservable
     const inputObservable = this;
@@ -21,10 +21,29 @@ function map(transformFN) {
     return outputObservable;
 }
 
+function filter(conditionFN) {
+    const inputObservable = this;
+    const outputObservable = createObservable(function subscribe(outputObservable) {
+        inputObservable.subscribe({
+            next: function(x) {
+                if(conditionFN(x)) {
+                    outputObservable.next(x);
+                }
+            },
+            error: (err) => outputObservable.error(err),
+            complete: function() {
+                outputObservable.complete();
+            }
+        })
+    });
+    return outputObservable;
+}
+
 function createObservable (subscribe) {
     return {
         subscribe: subscribe,
-        map: map
+        map: map,
+        filter: filter
     }
 }
 
@@ -51,4 +70,5 @@ const observer = {
 
 arrayObservable
     .map(x => x/10)
+    .filter(x => x !== 2)
     .subscribe(observer);
