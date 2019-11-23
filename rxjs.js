@@ -28,4 +28,6 @@ const observer = {
     }
 }
 
-arrayObservable.subscribe(observer);
+arrayObservable
+    .map(x => x/10)
+    .subscribe(observer);
